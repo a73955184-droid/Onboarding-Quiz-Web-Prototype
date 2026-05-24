@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AaronBux Onboarding - Step 5</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Config Verbatim -->
+<script id="tailwind-config">
+          tailwind.config = {
+            darkMode: "class",
+            theme: {
+              extend: {
+                "colors": {
+                        "on-secondary-fixed-variant": "#104e59",
+                        "tertiary-container": "#7af19c",
+                        "secondary-fixed": "#b5ebf9",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#66dd8b",
+                        "surface-container": "#0e222d",
+                        "primary-fixed": "#ffe170",
+                        "on-primary": "#3a3000",
+                        "surface-bright": "#293b47",
+                        "on-error": "#690005",
+                        "on-tertiary-fixed-variant": "#005227",
+                        "surface-container-low": "#091e29",
+                        "secondary": "#99cfdd",
+                        "inverse-on-surface": "#20333e",
+                        "secondary-fixed-dim": "#99cfdd",
+                        "on-surface": "#d1e5f5",
+                        "inverse-surface": "#d1e5f5",
+                        "on-secondary": "#00363f",
+                        "on-tertiary-container": "#006d36",
+                        "surface-dim": "#021520",
+                        "outline-variant": "#4d4632",
+                        "on-primary-fixed-variant": "#544600",
+                        "inverse-primary": "#705d00",
+                        "surface-tint": "#e9c400",
+                        "surface-container-highest": "#243743",
+                        "secondary-container": "#104e59",
+                        "on-surface-variant": "#d0c6ab",
+                        "on-primary-container": "#705d00",
+                        "tertiary": "#dbffde",
+                        "on-secondary-container": "#88becb",
+                        "tertiary-fixed": "#83fba5",
+                        "surface-variant": "#243743",
+                        "outline": "#999077",
+                        "on-background": "#d1e5f5",
+                        "on-tertiary-fixed": "#00210c",
+                        "error": "#ffb4ab",
+                        "surface": "#021520",
+                        "surface-container-high": "#192c38",
+                        "primary": "#fff5dc",
+                        "on-tertiary": "#003919",
+                        "background": "#021520",
+                        "primary-container": "#ffd600",
+                        "primary-fixed-dim": "#e9c400",
+                        "on-secondary-fixed": "#001f25",
+                        "error-container": "#93000a",
+                        "on-primary-fixed": "#221b00",
+                        "surface-container-lowest": "#00101a"
+                },
+                "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                },
+                "spacing": {
+                        "gutter": "1rem",
+                        "stack-sm": "0.5rem",
+                        "stack-md": "1.5rem",
+                        "stack-lg": "2.5rem",
+                        "container-max": "480px"
+                },
+                "fontFamily": {
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-lg": ["Inter"]
+                },
+                "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "500"}]
+                }
+              },
+            },
+          }
+    </script>
+<style>
+        body {
+            background-color: #021520;
+            color: #d1e5f5;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+        .onboarding-card {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            cursor: pointer;
+            user-select: none;
+            position: relative;
+        }
+        .onboarding-card:active {
+            transform: scale(0.98);
+        }
+        .onboarding-card.selected {
+            border: 2px solid #ffd600;
+            box-shadow: 0 0 12px rgba(255, 214, 0, 0.15);
+            background-color: #0e222d;
+        }
+        .checkmark-icon {
+            display: none;
+            position: absolute;
+            bottom: 6px;
+            right: 6px;
+            color: #021520;
+            background-color: #ffd600;
+            border-radius: 50%;
+            font-size: 16px !important;
+            padding: 1px;
+        }
+        .onboarding-card.selected .checkmark-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .progress-bar-fill {
+            transition: width 0.6s ease-in-out;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #021520;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #243743;
+            border-radius: 10px;
+        }
+        body {
+          min-height: 100dvh;
+        }
+    </style>
+</head>
+<body class="flex flex-col h-screen font-body-md text-body-md bg-background">
+<!-- Top Bar Component -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md">
+<div class="flex items-center justify-between px-6 h-14 w-full max-w-7xl mx-auto">
+<button class="text-on-surface-variant hover:opacity-80 transition-opacity active:scale-95 duration-150" onclick="handleBack()">
+<span class="material-symbols-outlined">close</span>
+</button>
+<div class="flex flex-col items-center"><span class="font-headline-md text-base font-bold text-primary tracking-tight">AaronBux</span>
+<span class="font-label-sm text-[10px] text-on-surface-variant uppercase tracking-wider">Step 5 of 7</span></div>
+<button class="text-on-surface-variant hover:opacity-80 transition-opacity active:scale-95 duration-150">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+</div>
+<div class="absolute top-0 left-0 w-full h-[4px] bg-[#ABE1EF]/20 z-[60]">
+<div class="progress-bar-fill h-full bg-[#FFD600]" style="width: 71.4%;"></div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-grow pt-20 pb-28 px-gutter max-w-container-max mx-auto w-full overflow-y-auto">
+<div class="mb-6 text-center"><h1 class="font-headline-lg-mobile text-2xl text-primary mb-3">Market Stress Behavior</h1>
+<p class="text-label-md text-on-surface-variant leading-relaxed">When markets become volatile, what reactions feel most familiar with your current portfolio?</p></div>
+<!-- Grid for Options -->
+<div class="grid grid-cols-2 gap-3" id="selection-grid">
+<!-- Card 1 -->
+<div class="onboarding-card bg-surface-container-low p-3 rounded-xl flex items-center min-h-[84px]" data-label="Avoid Emotional Changes" data-scores='{"GD": 3, "IP": 1}' onclick="toggleSelection(this)">
+<p class="text-label-sm text-on-surface leading-tight">I stay invested and avoid emotional changes</p>
+<span class="material-symbols-outlined checkmark-icon">check_circle</span>
+</div>
+<!-- Card 2 -->
+<div class="onboarding-card bg-surface-container-low p-3 rounded-xl flex items-center min-h-[84px]" data-label="Review Allocations" data-scores='{"GD": 2, "FT": 1}' onclick="toggleSelection(this)">
+<p class="text-label-sm text-on-surface leading-tight">I review whether my allocations still make sense</p>
+<span class="material-symbols-outlined checkmark-icon">check_circle</span>
+</div>
+<!-- Card 3 -->
+<div class="onboarding-card bg-surface-container-low p-3 rounded-xl flex items-center min-h-[84px]" data-label="Compare Reactions" data-scores='{"FT": 1, "TO": 1}' onclick="toggleSelection(this)">
+<p class="text-label-sm text-on-surface leading-tight">I compare how experienced investors are reacting</p>
+<span class="material-symbols-outlined checkmark-icon">check_circle</span>
+</div>
+<!-- Card 4 -->
+<div class="onboarding-card bg-surface-container-low p-3 rounded-xl flex items-center min-h-[84px]" data-label="Look for Opportunities" data-scores='{"TO": 3}' onclick="toggleSelection(this)">
+<p class="text-label-sm text-on-surface leading-tight">I look for opportunities created by market declines</p>
+<span class="material-symbols-outlined checkmark-icon">check_circle</span>
+</div>
+<!-- Card 5 -->
+<div class="onboarding-card bg-surface-container-low p-3 rounded-xl flex items-center min-h-[84px]" data-label="Protect Gains" data-scores='{"IP": 3, "GD": 1}' onclick="toggleSelection(this)">
+<p class="text-label-sm text-on-surface leading-tight">I focus more on protecting gains during uncertainty</p>
+<span class="material-symbols-outlined checkmark-icon">check_circle</span>
+</div>
+<!-- Card 6 -->
+<div class="onboarding-card bg-surface-container-low p-3 rounded-xl flex items-center min-h-[84px]" data-label="Consume Content" data-scores='{"GA": 1, "TO": 1}' onclick="toggleSelection(this)">
+<p class="text-label-sm text-on-surface leading-tight">I consume more investing content during downturns</p>
+<span class="material-symbols-outlined checkmark-icon">check_circle</span>
+</div>
+<!-- Card 7 -->
+<div class="onboarding-card bg-surface-container-low p-3 rounded-xl flex items-center min-h-[84px]" data-label="Second Guessing" data-scores='{"BFO": 2}' onclick="toggleSelection(this)">
+<p class="text-label-sm text-on-surface leading-tight">I sometimes second-guess my setup during volatility</p>
+<span class="material-symbols-outlined checkmark-icon">check_circle</span>
+</div>
+<!-- Card 8 -->
+<div class="onboarding-card bg-surface-container-low p-3 rounded-xl flex items-center min-h-[84px]" data-label="Designed for Uncertainty" data-scores='{"GD": 2, "IP": 1}' onclick="toggleSelection(this)">
+<p class="text-label-sm text-on-surface leading-tight">I prefer portfolios designed to handle uncertainty systematically</p>
+<span class="material-symbols-outlined checkmark-icon">check_circle</span>
+</div>
+</div>
+</main>
+<!-- Bottom Nav Component -->
+<nav class="fixed bottom-0 left-0 right-0 w-full z-50 flex justify-between items-center px-gutter py-4 bg-surface-container max-w-container-max mx-auto border-t border-white/10 shadow-lg">
+<button class="text-secondary px-4 py-2 text-label-md hover:opacity-80 transition-opacity active:scale-95 flex items-center gap-1" onclick="handleBack()">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+<span class="">Back</span>
+</button>
+<button class="bg-primary-container text-on-primary-container rounded-lg px-8 py-3 font-bold text-label-md hover:bg-primary-fixed-dim transition-colors active:scale-98 shadow-inner flex items-center gap-2" onclick="handleContinue()">
+<span class="">Continue</span>
+<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+</nav>
+<script>
+        function getUrlState() {
+            const params = new URLSearchParams(window.location.search);
+            const stateParam = params.get('state');
+            try {
+                return stateParam ? JSON.parse(decodeURIComponent(stateParam)) : {};
+            } catch (e) {
+                console.error('Error parsing state:', e);
+                return {};
+            }
+        }
+
+        function toggleSelection(element) {
+            element.classList.toggle('selected');
+        }
+
+        function handleContinue() {
+            const selectedCards = document.querySelectorAll('.onboarding-card.selected');
+            const state = getUrlState();
+            
+            // Refactored state management: Use nested scores
+            const updatedScores = { ...(state.scores || {}) };
+            
+            // Add scores for each selected card
+            selectedCards.forEach(card => {
+                const cardScores = JSON.parse(card.getAttribute('data-scores') || '{}');
+                for (const [key, value] of Object.entries(cardScores)) {
+                    updatedScores[key] = (updatedScores[key] || 0) + value;
+                }
+            });
+
+            // Build the next URL with updated nested state
+            state.scores = updatedScores;
+            state.step = 5;
+            const nextStateStr = encodeURIComponent(JSON.stringify(state));
+            window.location.href = `step6.html?state=${nextStateStr}`;
+        }
+
+        function handleBack() {
+            const state = getUrlState();
+            const stateStr = encodeURIComponent(JSON.stringify(state));
+            window.location.href = `step4.html?state=${stateStr}`;
+        }
+
+        // Entrance animation
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.onboarding-card');
+            
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(12px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.4s cubic-bezier(0.23, 1, 0.32, 1)';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 80 + (index * 40));
+            });
+        });
+    </script>
+</body></html>

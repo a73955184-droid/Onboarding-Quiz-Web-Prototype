@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AaronBux Onboarding - Step 1</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #021520;
+            color: #d1e5f5;
+            -webkit-font-smoothing: antialiased;
+            overflow: hidden; /* Zero-scroll intent */
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom Selected State */
+        .option-card.selected {
+            border-color: #ffd600 !important;
+            border-width: 2px;
+            box-shadow: 0 0 15px rgba(255, 214, 0, 0.15);
+            background-color: #0e222d;
+        }
+        .option-card.selected .check-icon {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .progress-glow {
+            box-shadow: 0 0 8px rgba(255, 214, 0, 0.4);
+        }
+        /* Button Disabled Styles */
+        button:disabled {
+            opacity: 0.35 !important;
+            cursor: not-allowed !important;
+            pointer-events: none !important;
+            background-color: #243743 !important;
+            color: #d0c6ab !important;
+            box-shadow: none !important;
+        }
+        /* Ensure enabled button has correct primary color */
+        #continue-btn:not(:disabled) {
+            background-color: #ffd600 !important;
+            color: #000000 !important;
+            opacity: 1 !important;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary-fixed-variant": "#005227",
+                      "on-primary-fixed": "#221b00",
+                      "surface-variant": "#243743",
+                      "surface-container-low": "#091e29",
+                      "on-secondary": "#00363f",
+                      "on-secondary-fixed": "#001f25",
+                      "on-surface-variant": "#d0c6ab",
+                      "error-container": "#93000a",
+                      "on-secondary-fixed-variant": "#104e59",
+                      "inverse-surface": "#d1e5f5",
+                      "secondary-container": "#104e59",
+                      "on-tertiary-fixed": "#00210c",
+                      "inverse-primary": "#705d00",
+                      "primary-container": "#ffd600",
+                      "outline": "#999077",
+                      "on-tertiary-container": "#006d36",
+                      "secondary": "#99cfdd",
+                      "primary-fixed": "#ffe170",
+                      "background": "#021520",
+                      "secondary-fixed": "#b5ebf9",
+                      "on-primary-container": "#705d00",
+                      "primary": "#fff5dc",
+                      "outline-variant": "#4d4632",
+                      "on-error-container": "#ffdad6",
+                      "on-secondary-container": "#88becb",
+                      "surface-container-highest": "#243743",
+                      "surface-tint": "#e9c400",
+                      "on-tertiary": "#003919",
+                      "surface-container-lowest": "#00101a",
+                      "surface-bright": "#293b47",
+                      "on-primary-fixed-variant": "#544600",
+                      "surface-dim": "#021520",
+                      "tertiary-container": "#7af19c",
+                      "surface": "#021520",
+                      "on-surface": "#d1e5f5",
+                      "surface-container-high": "#192c38",
+                      "tertiary-fixed": "#83fba5",
+                      "error": "#ffb4ab",
+                      "surface-container": "#0e222d",
+                      "on-error": "#690005",
+                      "tertiary": "#dbffde",
+                      "on-background": "#d1e5f5",
+                      "on-primary": "#3a3000",
+                      "secondary-fixed-dim": "#99cfdd",
+                      "tertiary-fixed-dim": "#66dd8b",
+                      "inverse-on-surface": "#20333e",
+                      "primary-fixed-dim": "#e9c400"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "container-max": "480px",
+                      "stack-lg": "2.5rem",
+                      "stack-sm": "0.5rem",
+                      "stack-md": "1.5rem",
+                      "gutter": "1rem"
+              },
+              "fontFamily": {
+                      "label-sm": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "body-md": ["Inter"],
+                      "label-md": ["Inter"],
+                      "headline-lg-mobile": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "body-lg": ["Inter"]
+              },
+              "fontSize": {
+                      "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "500"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="flex flex-col min-h-screen">
+<!-- Top Progress Indicator -->
+<div class="fixed top-0 left-0 w-full h-1 bg-secondary-container/30 z-[60]">
+<div class="h-full bg-primary-container progress-glow transition-all duration-700 ease-out" style="width: 14.28%;"></div>
+</div>
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md">
+<div class="flex items-center justify-between px-6 h-14 w-full max-w-7xl mx-auto">
+<button class="text-on-surface-variant hover:opacity-80 transition-opacity active:scale-95 duration-150" onclick="window.history.back()">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+<div class="flex flex-col items-center">
+<span class="font-headline-md text-base font-bold text-primary tracking-tight">AaronBux</span>
+<span class="font-label-sm text-[10px] text-on-surface-variant uppercase tracking-wider">Step 1 of 7</span>
+</div>
+<button class="text-on-surface-variant hover:opacity-80 transition-opacity active:scale-95 duration-150">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex flex-col items-center pt-16 pb-24 px-6 overflow-y-auto">
+<div class="w-full max-w-[480px]">
+<div class="mb-6 text-center">
+<h1 class="font-headline-lg-mobile text-2xl text-primary mb-2">Existing Setup</h1>
+<p class="font-body-md text-sm text-on-surface-variant leading-relaxed">Which of these best describes your current investment setup?</p>
+</div>
+<!-- 2-column, 4-row grid -->
+<div class="grid grid-cols-2 gap-3" id="selection-grid">
+<!-- Data weights: mapping to new required logic -->
+<button class="option-card onboarding-card relative group flex flex-col text-left p-3 rounded-xl border border-white/10 bg-surface-container transition-all duration-200 active:scale-[0.98] h-24" data-value="broad_etf" data-weights='{"GD": 2}' onclick="toggleSelection(this)" type="button">
+<span class="font-label-md text-[13px] text-on-surface group-hover:text-primary transition-colors leading-snug pr-2">Mostly broad ETFs or index funds that I hold long term</span>
+<div class="check-icon absolute bottom-2 right-2 opacity-0 scale-50 transition-all duration-200">
+<span class="material-symbols-outlined text-[#ffd600] text-lg" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</button>
+<button class="option-card onboarding-card relative group flex flex-col text-left p-3 rounded-xl border border-white/10 bg-surface-container transition-all duration-200 active:scale-[0.98] h-24" data-value="retirement" data-weights='{"IP": 2}' onclick="toggleSelection(this)" type="button">
+<span class="font-label-md text-[13px] text-on-surface group-hover:text-primary transition-colors leading-snug pr-2">Retirement accounts with simple allocations I rarely change</span>
+<div class="check-icon absolute bottom-2 right-2 opacity-0 scale-50 transition-all duration-200">
+<span class="material-symbols-outlined text-[#ffd600] text-lg" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</button>
+<button class="option-card onboarding-card relative group flex flex-col text-left p-3 rounded-xl border border-white/10 bg-surface-container transition-all duration-200 active:scale-[0.98] h-24" data-value="mix_stocks" data-weights='{"GA": 1, "FT": 1}' onclick="toggleSelection(this)" type="button">
+<span class="font-label-md text-[13px] text-on-surface group-hover:text-primary transition-colors leading-snug pr-2">A mix of ETFs and individual stocks</span>
+<div class="check-icon absolute bottom-2 right-2 opacity-0 scale-50 transition-all duration-200">
+<span class="material-symbols-outlined text-[#ffd600] text-lg" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</button>
+<button class="option-card onboarding-card relative group flex flex-col text-left p-3 rounded-xl border border-white/10 bg-surface-container transition-all duration-200 active:scale-[0.98] h-24" data-value="sectors" data-weights='{"GA": 2, "TO": 1}' onclick="toggleSelection(this)" type="button">
+<span class="font-label-md text-[13px] text-on-surface group-hover:text-primary transition-colors leading-snug pr-2">I’ve started exploring sectors, themes, or alternatives</span>
+<div class="check-icon absolute bottom-2 right-2 opacity-0 scale-50 transition-all duration-200">
+<span class="material-symbols-outlined text-[#ffd600] text-lg" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</button>
+<button class="option-card onboarding-card relative group flex flex-col text-left p-3 rounded-xl border border-white/10 bg-surface-container transition-all duration-200 active:scale-[0.98] h-24" data-value="layered" data-weights='{"GD": 1, "FT": 2}' onclick="toggleSelection(this)" type="button">
+<span class="font-label-md text-[13px] text-on-surface group-hover:text-primary transition-colors leading-snug pr-2">My portfolio has become more layered or intentional over time</span>
+<div class="check-icon absolute bottom-2 right-2 opacity-0 scale-50 transition-all duration-200">
+<span class="material-symbols-outlined text-[#ffd600] text-lg" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</button>
+<button class="option-card onboarding-card relative group flex flex-col text-left p-3 rounded-xl border border-white/10 bg-surface-container transition-all duration-200 active:scale-[0.98] h-24" data-value="rebalance" data-weights='{"FT": 2, "TO": 1}' onclick="toggleSelection(this)" type="button">
+<span class="font-label-md text-[13px] text-on-surface group-hover:text-primary transition-colors leading-snug pr-2">I actively compare allocations or rebalance periodically</span>
+<div class="check-icon absolute bottom-2 right-2 opacity-0 scale-50 transition-all duration-200">
+<span class="material-symbols-outlined text-[#ffd600] text-lg" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</button>
+<button class="option-card onboarding-card relative group flex flex-col text-left p-3 rounded-xl border border-white/10 bg-surface-container transition-all duration-200 active:scale-[0.98] h-24" data-value="opportunistic" data-weights='{"GA": 1, "TO": 2}' onclick="toggleSelection(this)" type="button">
+<span class="font-label-md text-[13px] text-on-surface group-hover:text-primary transition-colors leading-snug pr-2">I experiment with higher-growth or opportunistic positions</span>
+<div class="check-icon absolute bottom-2 right-2 opacity-0 scale-50 transition-all duration-200">
+<span class="material-symbols-outlined text-[#ffd600] text-lg" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</button>
+<button class="option-card onboarding-card relative group flex flex-col text-left p-3 rounded-xl border border-white/10 bg-surface-container transition-all duration-200 active:scale-[0.98] h-24" data-value="building" data-weights='{"BFO": 2}' onclick="toggleSelection(this)" type="button">
+<span class="font-label-md text-[13px] text-on-surface group-hover:text-primary transition-colors leading-snug pr-2">I’m still building my first serious long-term portfolio</span>
+<div class="check-icon absolute bottom-2 right-2 opacity-0 scale-50 transition-all duration-200">
+<span class="material-symbols-outlined text-[#ffd600] text-lg" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</button>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 right-0 bg-surface/80 backdrop-blur-xl border-t border-outline-variant/20 z-50">
+<div class="flex justify-between items-center px-6 py-4 w-full max-w-7xl mx-auto">
+<!-- Back Button -->
+<button class="flex items-center justify-center text-secondary hover:brightness-110 transition-all active:scale-[0.98] group" onclick="window.history.back()">
+<span class="material-symbols-outlined mr-2 group-hover:-translate-x-1 transition-transform" data-icon="chevron_left">chevron_left</span>
+<span class="font-label-sm text-label-sm">Back</span>
+</button>
+<!-- Continue Button (Primary) -->
+<button class="flex items-center justify-center bg-primary-container text-on-primary-container rounded-lg px-8 py-3 font-bold hover:brightness-110 transition-all active:scale-[0.98] shadow-lg shadow-primary-container/20 group disabled:opacity-35" disabled="" id="continue-btn">
+<span class="font-label-sm text-label-sm">Continue</span>
+<span class="material-symbols-outlined ml-2 group-hover:translate-x-1 transition-transform" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</nav>
+<script>
+        function updateContinueButton() {
+            const selectedCount = document.querySelectorAll('.onboarding-card.selected').length;
+            const continueBtn = document.getElementById('continue-btn');
+            continueBtn.disabled = (selectedCount === 0);
+        }
+
+        function toggleSelection(element) {
+            element.classList.toggle('selected');
+            
+            // Micro-interaction feedback
+            element.style.transform = 'scale(0.96)';
+            setTimeout(() => {
+                element.style.transform = '';
+            }, 100);
+
+            updateContinueButton();
+        }
+
+        // Entrance animation and initialization
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.onboarding-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(10px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1)';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100 + (index * 40));
+            });
+
+            // Initialize button state
+            updateContinueButton();
+        });
+
+        // Handle Continue Click (URL State Management)
+        document.getElementById('continue-btn').addEventListener('click', () => {
+            const selectedCards = document.querySelectorAll('.onboarding-card.selected');
+            
+            // 1. Initialize empty scores object
+            const scores = {GD:0, GA:0, IP:0, FT:0, ES:0, TO:0, BFO:0};
+
+            // 2. Calculate scores
+            selectedCards.forEach(card => {
+                const weights = JSON.parse(card.getAttribute('data-weights'));
+                for (const [archetype, value] of Object.entries(weights)) {
+                    if (scores.hasOwnProperty(archetype)) {
+                        scores[archetype] += value;
+                    }
+                }
+            });
+
+            // 3. Serialize the scores object (URL-encoded JSON)
+            const stateString = encodeURIComponent(JSON.stringify({
+                scores: scores,
+                step: 1
+            }));
+
+            // 4. Update navigation to link to Step 2 with the scores as a URL parameter
+            console.log("Navigating to Step 2 with state:", scores);
+            window.location.href = `step2.html?state=${stateString}`;
+        });
+    </script>
+</body></html>

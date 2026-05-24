@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AaronBux Onboarding - Step 4</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#ffe170",
+                        "surface-tint": "#e9c400",
+                        "surface-dim": "#021520",
+                        "inverse-primary": "#705d00",
+                        "inverse-on-surface": "#20333e",
+                        "surface-container-highest": "#243743",
+                        "on-secondary-fixed-variant": "#104e59",
+                        "on-primary-fixed": "#221b00",
+                        "surface-container-low": "#091e29",
+                        "on-surface-variant": "#d0c6ab",
+                        "tertiary-fixed": "#83fba5",
+                        "on-primary-fixed-variant": "#544600",
+                        "tertiary-container": "#7af19c",
+                        "on-background": "#d1e5f5",
+                        "secondary": "#99cfdd",
+                        "outline-variant": "#4d4632",
+                        "on-tertiary-fixed-variant": "#005227",
+                        "primary-fixed-dim": "#e9c400",
+                        "surface-bright": "#293b47",
+                        "surface-container-lowest": "#00101a",
+                        "on-tertiary": "#003919",
+                        "tertiary": "#dbffde",
+                        "error-container": "#93000a",
+                        "tertiary-fixed-dim": "#66dd8b",
+                        "on-tertiary-container": "#006d36",
+                        "surface-variant": "#243743",
+                        "inverse-surface": "#d1e5f5",
+                        "secondary-container": "#104e59",
+                        "surface-container": "#0e222d",
+                        "on-tertiary-fixed": "#00210c",
+                        "on-primary": "#3a3000",
+                        "background": "#021520",
+                        "on-error": "#690005",
+                        "on-primary-container": "#705d00",
+                        "primary-container": "#ffd600",
+                        "on-secondary": "#00363f",
+                        "primary": "#fff5dc",
+                        "on-secondary-container": "#88becb",
+                        "on-surface": "#d1e5f5",
+                        "outline": "#999077",
+                        "surface": "#021520",
+                        "secondary-fixed": "#b5ebf9",
+                        "error": "#ffb4ab",
+                        "surface-container-high": "#192c38",
+                        "secondary-fixed-dim": "#99cfdd",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary-fixed": "#001f25"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-sm": "0.5rem",
+                        "stack-lg": "2.5rem",
+                        "gutter": "1rem",
+                        "stack-md": "1.5rem",
+                        "container-max": "480px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "500" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #021520;
+            color: #d1e5f5;
+            font-family: 'Inter', sans-serif;
+            min-height: max(884px, 100dvh);
+        }
+        .onboarding-card {
+            background-color: #0e222d;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0px 8px 24px rgba(0,0,0,0.4);
+            cursor: pointer;
+        }
+        .onboarding-card.selected {
+            border: 2px solid #ffd600;
+            box-shadow: 0px 0px 12px rgba(255, 214, 0, 0.25), 0px 8px 24px rgba(0,0,0,0.4);
+            transform: translateY(-2px);
+        }
+        .progress-bar-fill {
+            width: 57.1%;
+            transition: width 0.6s ease-in-out;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col overflow-hidden">
+<!-- Progress Indicator Top Edge -->
+<div class="fixed top-0 left-0 w-full h-1 bg-secondary/20 z-[60]">
+<div class="h-full bg-primary-container progress-bar-fill"></div>
+</div>
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-white/5">
+<div class="flex items-center justify-between px-6 h-14 w-full max-w-7xl mx-auto">
+<button class="text-on-surface-variant hover:opacity-80 transition-opacity active:scale-95 duration-150" onclick="handleExit()">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+<div class="flex flex-col items-center">
+<span class="font-display text-lg font-bold text-primary tracking-tight" style="opacity: 0;">AaronBux</span>
+<span class="text-[10px] text-on-surface-variant uppercase tracking-widest mt-0.5">Step 4 of 7</span>
+</div>
+<button class="text-on-surface-variant hover:opacity-80 transition-opacity active:scale-95 duration-150">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-grow w-full max-w-[480px] mx-auto px-gutter pb-[120px] pt-20 overflow-y-auto">
+<!-- Header Section -->
+<section class="mb-stack-lg text-center">
+<h1 class="font-display text-2xl text-primary font-semibold mb-3">Portfolio Management Style</h1>
+<p class="font-body-md text-sm text-on-surface-variant leading-relaxed">How do you currently manage or interact with your investments?</p>
+</section>
+<!-- Grid Layout: 2x4 Grid -->
+<div class="grid grid-cols-2 gap-3 w-full" id="selection-grid">
+<!-- Card 1 -->
+<button class="onboarding-card group text-left p-3 rounded-xl flex flex-col justify-between h-24 active:scale-95 transition-all" data-label="Passive" onclick="toggleCard(this)">
+<span class="font-label-sm text-label-sm text-on-surface group-hover:text-primary-container transition-colors">I mostly leave investments alone after setting them up</span>
+<div class="flex justify-end opacity-0 group-[.selected]:opacity-100">
+<span class="material-symbols-outlined text-primary-container text-[18px]" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</button>
+<!-- Card 2 -->
+<button class="onboarding-card group text-left p-3 rounded-xl flex flex-col justify-between h-24 active:scale-95 transition-all" data-label="Rebalancer" onclick="toggleCard(this)">
+<span class="font-label-sm text-label-sm text-on-surface group-hover:text-primary-container transition-colors">I review allocations occasionally and make gradual adjustments</span>
+<div class="flex justify-end opacity-0 group-[.selected]:opacity-100">
+<span class="material-symbols-outlined text-primary-container text-[18px]" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</button>
+<!-- Card 3 -->
+<button class="onboarding-card group text-left p-3 rounded-xl flex flex-col justify-between h-24 active:scale-95 transition-all" data-label="Strategic" onclick="toggleCard(this)">
+<span class="font-label-sm text-label-sm text-on-surface group-hover:text-primary-container transition-colors">I research portfolio strategies before making changes</span>
+<div class="flex justify-end opacity-0 group-[.selected]:opacity-100">
+<span class="material-symbols-outlined text-primary-container text-[18px]" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</button>
+<!-- Card 4 -->
+<button class="onboarding-card group text-left p-3 rounded-xl flex flex-col justify-between h-24 active:scale-95 transition-all" data-label="Community-driven" onclick="toggleCard(this)">
+<span class="font-label-sm text-label-sm text-on-surface group-hover:text-primary-container transition-colors">I follow investing discussions, Reddit, YouTube, or finance communities regularly</span>
+<div class="flex justify-end opacity-0 group-[.selected]:opacity-100">
+<span class="material-symbols-outlined text-primary-container text-[18px]" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</button>
+<!-- Card 5 -->
+<button class="onboarding-card group text-left p-3 rounded-xl flex flex-col justify-between h-24 active:scale-95 transition-all" data-label="Analytical" onclick="toggleCard(this)">
+<span class="font-label-sm text-label-sm text-on-surface group-hover:text-primary-container transition-colors">I compare investing frameworks before changing allocations</span>
+<div class="flex justify-end opacity-0 group-[.selected]:opacity-100">
+<span class="material-symbols-outlined text-primary-container text-[18px]" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</button>
+<!-- Card 6 -->
+<button class="onboarding-card group text-left p-3 rounded-xl flex flex-col justify-between h-24 active:scale-95 transition-all" data-label="Explorer" onclick="toggleCard(this)">
+<span class="font-label-sm text-label-sm text-on-surface group-hover:text-primary-container transition-colors">I enjoy exploring new investing ideas and strategies</span>
+<div class="flex justify-end opacity-0 group-[.selected]:opacity-100">
+<span class="material-symbols-outlined text-primary-container text-[18px]" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</button>
+<!-- Card 7 -->
+<button class="onboarding-card group text-left p-3 rounded-xl flex flex-col justify-between h-24 active:scale-95 transition-all" data-label="Experimental" onclick="toggleCard(this)">
+<span class="font-label-sm text-label-sm text-on-surface group-hover:text-primary-container transition-colors">I experiment carefully with smaller positions or themes</span>
+<div class="flex justify-end opacity-0 group-[.selected]:opacity-100">
+<span class="material-symbols-outlined text-primary-container text-[18px]" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</button>
+<!-- Card 8 -->
+<button class="onboarding-card group text-left p-3 rounded-xl flex flex-col justify-between h-24 active:scale-95 transition-all" data-label="Structured" onclick="toggleCard(this)">
+<span class="font-label-sm text-label-sm text-on-surface group-hover:text-primary-container transition-colors">I prefer having a structured investing framework instead of random decisions</span>
+<div class="flex justify-end opacity-0 group-[.selected]:opacity-100">
+<span class="material-symbols-outlined text-primary-container text-[18px]" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</button>
+</div>
+</main>
+<!-- Bottom Navigation -->
+<nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] bg-surface-container border-t border-white/10 shadow-[0_-8px_24px_rgba(0,0,0,0.4)] px-gutter py-4 flex justify-between items-center z-50 h-20">
+<button class="flex items-center justify-center text-secondary-fixed font-medium px-4 hover:opacity-80 transition-all active:scale-95 duration-150" onclick="handleBack()">
+<span class="material-symbols-outlined mr-2" data-icon="chevron_left">chevron_left</span>
+<span class="font-label-md text-label-md">Back</span>
+</button>
+<button class="flex items-center justify-center bg-primary-container text-on-primary-container rounded-lg px-6 py-3 font-bold hover:brightness-110 transition-all active:scale-98 duration-150 shadow-lg shadow-primary-container/10 opacity-50 cursor-not-allowed" disabled="" id="continue-btn" onclick="handleContinue()">
+<span class="font-label-md text-label-md mr-2">Continue</span>
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</nav>
+<script>
+    // Archetype Score Mapping
+    const archetypeMapping = {
+        "Passive": { GD: 3, IP: 1 },
+        "Rebalancer": { GD: 2, FT: 1 },
+        "Strategic": { FT: 2, TO: 1 },
+        "Community-driven": { GA: 1, TO: 2 },
+        "Analytical": { FT: 2, GD: 1 },
+        "Explorer": { GA: 2, TO: 1 },
+        "Experimental": { GA: 1, FT: 1 },
+        "Structured": { FT: 2, BFO: 1 }
+    };
+
+    function getUrlState() {
+        const params = new URLSearchParams(window.location.search);
+        const stateParam = params.get('state');
+        try {
+            return stateParam ? JSON.parse(decodeURIComponent(stateParam)) : { scores: { GD: 0, IP: 0, FT: 0, TO: 0, GA: 0, BFO: 0 } };
+        } catch (e) {
+            console.error("Error parsing state:", e);
+            return { scores: { GD: 0, IP: 0, FT: 0, TO: 0, GA: 0, BFO: 0 } };
+        }
+    }
+
+    function toggleCard(element) {
+        element.classList.toggle('selected');
+        updateButtonState();
+    }
+
+    function updateButtonState() {
+        const selectedCards = document.querySelectorAll('.onboarding-card.selected');
+        const anySelected = selectedCards.length > 0;
+        const btn = document.getElementById('continue-btn');
+        
+        if (anySelected) {
+            btn.classList.remove('opacity-50', 'cursor-not-allowed');
+            btn.disabled = false;
+        } else {
+            btn.classList.add('opacity-50', 'cursor-not-allowed');
+            btn.disabled = true;
+        }
+    }
+
+    function handleContinue() {
+        const selectedCards = document.querySelectorAll('.onboarding-card.selected');
+        if (selectedCards.length === 0) return;
+
+        const state = getUrlState();
+        const currentScores = { ...(state.scores || {}) };
+        
+        selectedCards.forEach(card => {
+            const label = card.getAttribute('data-label');
+            const scores = archetypeMapping[label];
+            if (scores) {
+                for (const [key, value] of Object.entries(scores)) {
+                    currentScores[key] = (currentScores[key] || 0) + value;
+                }
+            }
+        });
+
+        state.scores = currentScores;
+
+        const nextStepUrl = `step5.html?state=${encodeURIComponent(JSON.stringify(state))}`;
+        window.location.href = nextStepUrl;
+    }
+
+    function handleBack() {
+        window.history.back();
+    }
+
+    function handleExit() {
+        window.location.href = 'index.html';
+    }
+
+    // Initialize state on load
+    window.onload = () => {
+        updateButtonState();
+    };
+</script>
+</body></html>
