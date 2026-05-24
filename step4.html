@@ -123,6 +123,115 @@
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
     </style>
+
+<!-- Desktop and scroll normalization overrides -->
+<style id="desktop-responsive-overrides">
+  html,
+  body {
+    min-height: 100%;
+    height: auto !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  main {
+    overflow-y: visible !important;
+    padding-bottom: 120px !important;
+  }
+
+  .no-scrollbar,
+  .custom-scroll {
+    -ms-overflow-style: auto !important;
+    scrollbar-width: auto !important;
+  }
+
+  body::-webkit-scrollbar,
+  main::-webkit-scrollbar,
+  .no-scrollbar::-webkit-scrollbar,
+  .custom-scroll::-webkit-scrollbar {
+    display: block !important;
+    width: 8px;
+  }
+
+  body::-webkit-scrollbar-track,
+  main::-webkit-scrollbar-track,
+  .no-scrollbar::-webkit-scrollbar-track,
+  .custom-scroll::-webkit-scrollbar-track {
+    background: #021520;
+  }
+
+  body::-webkit-scrollbar-thumb,
+  main::-webkit-scrollbar-thumb,
+  .no-scrollbar::-webkit-scrollbar-thumb,
+  .custom-scroll::-webkit-scrollbar-thumb {
+    background: #243743;
+    border-radius: 9999px;
+  }
+
+  @media (min-width: 768px) {
+    header,
+    nav {
+      max-width: 100% !important;
+    }
+
+    main,
+    .main-container,
+    main > div,
+    main.max-w-\[480px\],
+    main.max-w-container-max,
+    .max-w-\[480px\],
+    .max-w-container-max {
+      max-width: 920px !important;
+    }
+
+    #selection-grid,
+    #goals-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+      gap: 1rem !important;
+    }
+
+    #age-range-options {
+      display: grid !important;
+      grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+      gap: 1rem !important;
+      width: 100% !important;
+    }
+
+    #age-range-options button {
+      min-height: 96px;
+      align-items: center;
+    }
+
+    .onboarding-card,
+    .goal-card {
+      min-height: 104px !important;
+      height: auto !important;
+    }
+
+    .main-container {
+      height: auto !important;
+      min-height: 100vh !important;
+    }
+  }
+
+  @media (min-width: 1100px) {
+    main,
+    .main-container,
+    main > div,
+    main.max-w-\[480px\],
+    main.max-w-container-max,
+    .max-w-\[480px\],
+    .max-w-container-max {
+      max-width: 1040px !important;
+    }
+  }
+</style>
+
 </head>
 <body class="min-h-screen flex flex-col overflow-hidden">
 <!-- Progress Indicator Top Edge -->
