@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AaronBux - Evolution Direction</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <button class="btn btn-secondary" id="backBtn" type="button">Back</button>
+        <div style="text-align:center">
+          <div class="brand">AaronBux</div>
+          <div class="step-label">Step 5 of 8</div>
+        </div>
+        <div class="step-label">Behavioral onboarding</div>
+      </div>
+      <div class="progress-track"><div class="progress-fill" style="width:62.5%"></div></div>
+    </header>
+    <main class="main">
+      <section class="panel card">
+        <div class="eyebrow">Investor evolution</div>
+        <h2>What kind of investor do you think you’re becoming?</h2>
+        <p class="lead">This is a high-signal identity screen: it maps the direction of your investing evolution.</p>
+        <div id="options" class="screen-grid"></div>
+      </section>
+    </main>
+    <nav class="bottom-nav">
+      <div class="bottom-inner">
+        <span class="step-label">Choose one option</span>
+        <button class="btn btn-primary" id="continueBtn" type="button">Continue</button>
+      </div>
+    </nav>
+  </div>
+  <script src="app.js"></script>
+
+  <script>
+    setupOptionScreen({
+      title: "Evolution Direction",
+      screenKey: "evolution",
+      next: "screen6.html",
+      min: 1,
+      max: 1,
+      type: "normal",
+      options: [{"id": "structured", "label": "More intentional and structured", "helper": "System-building orientation.", "scores": {"BFO": 4}}, {"id": "analytical", "label": "More analytical and research-driven", "helper": "Systematic optimization orientation.", "scores": {"FT": 4}}, {"id": "growth", "label": "More growth-oriented", "helper": "Growth and upside orientation.", "scores": {"GA": 3, "TO": 1}}, {"id": "preservation", "label": "More focused on stability and preservation", "helper": "Protection and durability orientation.", "scores": {"IP": 4}}, {"id": "experimental", "label": "More experimental and opportunity-seeking", "helper": "Active exploration orientation.", "scores": {"TO": 3, "GA": 2}}]
+    });
+  </script>
+</body>
+</html>
