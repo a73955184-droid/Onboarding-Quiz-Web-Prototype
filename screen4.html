@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AaronBux - Market Psychology</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <button class="btn btn-secondary" id="backBtn" type="button">Back</button>
+        <div style="text-align:center">
+          <div class="brand">AaronBux</div>
+          <div class="step-label">Step 4 of 8</div>
+        </div>
+        <div class="step-label">Behavioral onboarding</div>
+      </div>
+      <div class="progress-track"><div class="progress-fill" style="width:50%"></div></div>
+    </header>
+    <main class="main">
+      <section class="panel card">
+        <div class="eyebrow">Market psychology</div>
+        <h2>What feels hardest during uncertain markets?</h2>
+        <p class="lead">This is not classic risk tolerance. It captures your interpretation style under uncertainty.</p>
+        <div id="options" class="screen-grid"></div>
+      </section>
+    </main>
+    <nav class="bottom-nav">
+      <div class="bottom-inner">
+        <span class="step-label">Choose one option</span>
+        <button class="btn btn-primary" id="continueBtn" type="button">Continue</button>
+      </div>
+    </nav>
+  </div>
+  <script src="app.js"></script>
+
+  <script>
+    setupOptionScreen({
+      title: "Market Psychology",
+      screenKey: "marketPsychology",
+      next: "screen5.html",
+      min: 1,
+      max: 1,
+      type: "normal",
+      options: [{"id": "staycourse", "label": "Knowing whether to stay the course", "helper": "Long-term discipline plus validation need.", "scores": {"GD": 2, "BFO": 2}}, {"id": "missingopp", "label": "Feeling like I might be missing opportunities", "helper": "FOMO and opportunity pressure.", "scores": {"TO": 3, "GA": 1}}, {"id": "emotional", "label": "Overreacting emotionally", "helper": "Need simplicity and behavioral guardrails.", "scores": {"ES": 2, "BFO": 1}}, {"id": "fit", "label": "Knowing when a strategy no longer fits", "helper": "Portfolio evolution concern.", "scores": {"FT": 2, "BFO": 1}}, {"id": "noise", "label": "Filtering useful information from noise", "helper": "Need decision clarity and curation.", "scores": {"FT": 2, "GD": 1}}]
+    });
+  </script>
+</body>
+</html>
