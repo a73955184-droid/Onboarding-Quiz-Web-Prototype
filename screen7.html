@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AaronBux - Age</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <button class="btn btn-secondary" id="backBtn" type="button">Back</button>
+        <div style="text-align:center">
+          <div class="brand">AaronBux</div>
+          <div class="step-label">Step 7 of 8</div>
+        </div>
+        <div class="step-label">Behavioral onboarding</div>
+      </div>
+      <div class="progress-track"><div class="progress-fill" style="width:87.5%"></div></div>
+    </header>
+    <main class="main">
+      <section class="panel card">
+        <div class="eyebrow">Time horizon modifier</div>
+        <h2>Which age range are you in?</h2>
+        <p class="lead">Age acts as a modifier only. It should refine the profile, not dominate it.</p>
+        <div id="options" class="screen-grid"></div>
+      </section>
+    </main>
+    <nav class="bottom-nav">
+      <div class="bottom-inner">
+        <span class="step-label">Choose one age range</span>
+        <button class="btn btn-primary" id="continueBtn" type="button">Continue</button>
+      </div>
+    </nav>
+  </div>
+  <script src="app.js"></script>
+
+  <script>
+    setupOptionScreen({
+      title: "Age",
+      screenKey: "age",
+      next: "screen8.html",
+      min: 1,
+      max: 1,
+      type: "age",
+      options: [{"id": "under25", "label": "Under 25", "helper": "Boosts growth, tactical, and factor tolerance.", "scores": {}}, {"id": "25-34", "label": "25–34", "helper": "Boosts growth and factor orientation.", "scores": {}}, {"id": "35-44", "label": "35–44", "helper": "Neutral modifier.", "scores": {}}, {"id": "45-54", "label": "45–54", "helper": "Boosts balanced and preservation orientation.", "scores": {}}, {"id": "55plus", "label": "55+", "helper": "Boosts income/preservation and reduces tactical tilt.", "scores": {}}]
+    });
+  </script>
+</body>
+</html>
