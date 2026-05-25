@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AaronBux - Decision Style</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <button class="btn btn-secondary" id="backBtn" type="button">Back</button>
+        <div style="text-align:center">
+          <div class="brand">AaronBux</div>
+          <div class="step-label">Step 3 of 8</div>
+        </div>
+        <div class="step-label">Behavioral onboarding</div>
+      </div>
+      <div class="progress-track"><div class="progress-fill" style="width:37.5%"></div></div>
+    </header>
+    <main class="main">
+      <section class="panel card">
+        <div class="eyebrow">Reasoning style</div>
+        <h2>When making investing decisions, what feels most natural to you?</h2>
+        <p class="lead">This identifies how you build confidence before acting.</p>
+        <div id="options" class="screen-grid"></div>
+      </section>
+    </main>
+    <nav class="bottom-nav">
+      <div class="bottom-inner">
+        <span class="step-label">Choose one option</span>
+        <button class="btn btn-primary" id="continueBtn" type="button">Continue</button>
+      </div>
+    </nav>
+  </div>
+  <script src="app.js"></script>
+
+  <script>
+    setupOptionScreen({
+      title: "Decision Style",
+      screenKey: "decisionStyle",
+      next: "screen4.html",
+      min: 1,
+      max: 1,
+      type: "normal",
+      options: [{"id": "simple", "label": "Keep things simple and consistent", "helper": "Consistency over complexity.", "scores": {"ES": 3, "GD": 2}}, {"id": "tradeoffs", "label": "Understand tradeoffs before changing anything", "helper": "Interpretation before action.", "scores": {"BFO": 3, "FT": 1}}, {"id": "research", "label": "Research deeply before acting", "helper": "Analytical conviction building.", "scores": {"FT": 3}}, {"id": "opportunities", "label": "Look for opportunities others miss", "helper": "Opportunity-seeking mindset.", "scores": {"TO": 3, "GA": 1}}, {"id": "experienced", "label": "Learn from how experienced investors think", "helper": "Framework and validation-seeking signal.", "scores": {"FT": 2, "BFO": 1}}]
+    });
+  </script>
+</body>
+</html>
