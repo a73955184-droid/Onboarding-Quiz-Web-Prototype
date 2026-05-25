@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AaronBux - Transition Pressure</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <button class="btn btn-secondary" id="backBtn" type="button">Back</button>
+        <div style="text-align:center">
+          <div class="brand">AaronBux</div>
+          <div class="step-label">Step 2 of 8</div>
+        </div>
+        <div class="step-label">Behavioral onboarding</div>
+      </div>
+      <div class="progress-track"><div class="progress-fill" style="width:25%"></div></div>
+    </header>
+    <main class="main">
+      <section class="panel card">
+        <div class="eyebrow">Transition pressure</div>
+        <h2>What’s making you rethink your investing approach lately?</h2>
+        <p class="lead">This captures the validation-seeking and strategy-evolution trigger.</p>
+        <div id="options" class="screen-grid"></div>
+      </section>
+    </main>
+    <nav class="bottom-nav">
+      <div class="bottom-inner">
+        <span class="step-label">Choose one option</span>
+        <button class="btn btn-primary" id="continueBtn" type="button">Continue</button>
+      </div>
+    </nav>
+  </div>
+  <script src="app.js"></script>
+
+  <script>
+    setupOptionScreen({
+      title: "Transition Pressure",
+      screenKey: "transition",
+      next: "screen3.html",
+      min: 1,
+      max: 1,
+      type: "normal",
+      options: [{"id": "rightway", "label": "I’m not sure if I’m investing the right way", "helper": "Validation and confidence check.", "scores": {"BFO": 3, "GD": 1}}, {"id": "basicnotenough", "label": "I feel like basic investing may not be enough", "helper": "Passive may be evolving toward intentional.", "scores": {"FT": 3, "GA": 1}}, {"id": "returns", "label": "I want to improve my returns more intentionally", "helper": "Optimization and control signal.", "scores": {"FT": 2, "TO": 2}}, {"id": "toomany", "label": "I see so many strategies and don’t know what fits me", "helper": "Need interpretation and filtering.", "scores": {"BFO": 2, "ES": 1}}, {"id": "confidence", "label": "I want more confidence in my decisions", "helper": "Decision validation signal.", "scores": {"BFO": 3, "GD": 1}}]
+    });
+  </script>
+</body>
+</html>
