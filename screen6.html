@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AaronBux - Tradeoff Preference</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <button class="btn btn-secondary" id="backBtn" type="button">Back</button>
+        <div style="text-align:center">
+          <div class="brand">AaronBux</div>
+          <div class="step-label">Step 6 of 8</div>
+        </div>
+        <div class="step-label">Behavioral onboarding</div>
+      </div>
+      <div class="progress-track"><div class="progress-fill" style="width:75%"></div></div>
+    </header>
+    <main class="main">
+      <section class="panel card">
+        <div class="eyebrow">Tradeoff philosophy</div>
+        <h2>Which tradeoff feels most acceptable to you?</h2>
+        <p class="lead">This screen identifies the tradeoff you can live with, which is more useful than asking generic risk tolerance.</p>
+        <div id="options" class="screen-grid"></div>
+      </section>
+    </main>
+    <nav class="bottom-nav">
+      <div class="bottom-inner">
+        <span class="step-label">Choose one option</span>
+        <button class="btn btn-primary" id="continueBtn" type="button">Continue</button>
+      </div>
+    </nav>
+  </div>
+  <script src="app.js"></script>
+
+  <script>
+    setupOptionScreen({
+      title: "Tradeoff Preference",
+      screenKey: "tradeoff",
+      next: "screen7.html",
+      min: 1,
+      max: 1,
+      type: "normal",
+      options: [{"id": "peace", "label": "Lower upside for more peace of mind", "helper": "Prefer calm over maximum upside.", "scores": {"IP": 3, "GD": 1}}, {"id": "complexity", "label": "More complexity for potentially better returns", "helper": "Willing to manage additional moving parts.", "scores": {"FT": 3}}, {"id": "stability", "label": "Slower growth for greater stability", "helper": "Durability over speed.", "scores": {"IP": 2, "BFO": 1}}, {"id": "control", "label": "More involvement for greater control", "helper": "Hands-on optimization.", "scores": {"FT": 2, "TO": 2}}, {"id": "avoidmistakes", "label": "Missing some opportunities to avoid big mistakes", "helper": "Protect against overreaction and bad decisions.", "scores": {"BFO": 3, "GD": 1}}]
+    });
+  </script>
+</body>
+</html>
