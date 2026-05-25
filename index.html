@@ -1,16 +1,34 @@
-<!DOCTYPE html>
-<html class="dark" lang="en">
+<!doctype html>
+<html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AaronBux Prototype</title>
-  <meta http-equiv="refresh" content="0; url=step1.html" />
-  <style>
-    body { margin: 0; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background:#021520; color:#d1e5f5; display:grid; place-items:center; min-height:100vh; }
-    a { color:#ffd600; }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AaronBux Behavioral Onboarding V2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <p>Opening AaronBux prototype… <a href="step1.html">Start here</a>.</p>
+  <main class="main">
+    <section class="hero">
+      <div>
+        <div class="eyebrow">AaronBux decision clarity engine</div>
+        <h1>Understand how your investing mindset is evolving.</h1>
+        <p class="lead">This prototype maps your current setup, questions, decision style, market psychology, tradeoffs, age, and goals into an investor evolution profile.</p>
+        <button class="btn btn-primary" onclick="window.location.href='screen1.html'">Start onboarding</button>
+      </div>
+      <div class="card panel">
+        <span class="pill">Not a risk quiz</span>
+        <h3 style="margin-top:18px">Built for Validation Seekers and Emerging Strategists</h3>
+        <p>Instead of telling you what to buy first, AaronBux explains what kind of investing system you appear to be growing into, why, and what tradeoffs come with it.</p>
+        <div class="summary-list">
+          <div class="summary-item">Behavioral interpretation before archetype reveal</div>
+          <div class="summary-item">Choice-level traceability</div>
+          <div class="summary-item">Sample portfolio system, not ticker-first advice</div>
+        </div>
+      </div>
+    </section>
+  </main>
 </body>
 </html>
