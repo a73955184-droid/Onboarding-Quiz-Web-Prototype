@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AaronBux - Investor Evolution Profile</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <button class="btn btn-secondary" onclick="history.back()">Back</button>
+        <div style="text-align:center">
+          <div class="brand">AaronBux</div>
+          <div class="step-label">Investor evolution profile</div>
+        </div>
+        <button class="btn btn-secondary" onclick="window.location.href='index.html'">Restart</button>
+      </div>
+      <div class="progress-track"><div class="progress-fill" style="width:100%"></div></div>
+    </header>
+
+    <main class="main">
+      <div id="missingState" class="card panel" style="display:none">
+        <span class="pill">Debug state missing</span>
+        <h2>Recommendation state missing.</h2>
+        <p class="lead">The onboarding flow did not pass URL state into this screen. Complete the flow from the start, or check that the final URL includes <strong>?state=...</strong>.</p>
+        <p class="step-label" id="searchString"></p>
+      </div>
+
+      <section id="result" class="result-grid" style="display:none">
+        <div class="card panel">
+          <span class="pill">Transition interpretation</span>
+          <h2 id="transitionTitle">Loading...</h2>
+          <p class="lead" id="transitionDesc"></p>
+
+          <div style="margin-top:28px">
+            <h3>Your current investing behavior most closely resembles:</h3>
+            <h2 id="primaryName" style="margin-top:8px"></h2>
+            <p id="primaryShort"></p>
+          </div>
+
+          <div style="margin-top:24px">
+            <h3>Secondary tendency</h3>
+            <p><strong id="secondaryName" style="color:#fff5dc"></strong> <span id="secondaryShort"></span></p>
+          </div>
+
+          <div style="margin-top:26px">
+            <h3>Archetype strength</h3>
+            <div class="bar"><div id="strengthBar" style="width:0%"></div></div>
+            <p id="strengthText"></p>
+          </div>
+        </div>
+
+        <aside class="card panel">
+          <span class="pill">Why this result?</span>
+          <h3>Top score drivers</h3>
+          <div id="scoreDrivers" class="summary-list"></div>
+        </aside>
+      </section>
+
+      <section id="explanation" class="card panel" style="margin-top:24px; display:none">
+        <div class="result-grid">
+          <div>
+            <h3>Strongest behavioral signals</h3>
+            <div id="signalList" class="summary-list"></div>
+          </div>
+          <div>
+            <h3>Most influential screens</h3>
+            <div id="dominantScreens" class="summary-list"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="portfolioSystem" class="card panel" style="margin-top:24px; display:none">
+        <span class="pill">Sample system structure</span>
+        <h2>This is a system, not a ticker-first recommendation.</h2>
+        <div class="system-structure" id="systemStructure"></div>
+        <h3 style="margin-top:24px">Example building blocks</h3>
+        <div id="exampleBlocks" class="summary-list"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    function hasStateInUrl() {
+      return new URLSearchParams(window.location.search).has('state');
+    }
+
+    function contributionByScreen(state) {
+      const rows = [];
+      for (const [screenKey, answers] of Object.entries(state.answers || {})) {
+        let total = 0;
+        const labels = [];
+        (answers || []).forEach(a => {
+          labels.push(a.label);
+          Object.values(a.scores || {}).forEach(v => total += Math.abs(Number(v) || 0));
+        });
+        if (screenKey === 'age') total = 1;
+        rows.push({ screenKey, total, labels, screen: answers?.[0]?.screen || screenKey });
+      }
+      return rows.sort((a,b) => b.total - a.total);
+    }
+
+    function render() {
+      if (!hasStateInUrl()) {
+        document.getElementById('missingState').style.display = 'block';
+        document.getElementById('searchString').innerText = `Current search string: ${window.location.search || '(empty)'}`;
+        return;
+      }
+
+      const state = getState();
+      const ranked = rankScores(state.scores);
+      const top = ranked[0];
+      const second = ranked[1] || ranked[0];
+      const profile = ARCHETYPES[top.id] || ARCHETYPES.GD;
+      const secondary = ARCHETYPES[second.id] || ARCHETYPES.GD;
+      const maxScore = Math.max(1, ranked.reduce((sum, item) => sum + item.score, 0));
+      const strength = Math.round((top.score / maxScore) * 100);
+
+      document.getElementById('result').style.display = 'grid';
+      document.getElementById('explanation').style.display = 'block';
+      document.getElementById('portfolioSystem').style.display = 'block';
+
+      document.getElementById('transitionTitle').innerText = profile.transition;
+      document.getElementById('transitionDesc').innerText = profile.tradeoff;
+      document.getElementById('primaryName').innerText = profile.name;
+      document.getElementById('primaryShort').innerText = profile.short;
+      document.getElementById('secondaryName').innerText = secondary.name + ':';
+      document.getElementById('secondaryShort').innerText = ' ' + secondary.short;
+      document.getElementById('strengthBar').style.width = `${Math.max(8, strength)}%`;
+      document.getElementById('strengthText').innerText = `${strength}% of weighted archetype signal points to ${profile.name}.`;
+
+      document.getElementById('scoreDrivers').innerHTML = ranked.slice(0, 4).map(item => `
+        <div class="summary-item">
+          <strong style="color:#fff5dc">${ARCHETYPES[item.id]?.name || item.id}</strong><br>
+          <span class="step-label">Score: ${Number(item.score).toFixed(1)}</span>
+        </div>
+      `).join('');
+
+      const influential = contributionByScreen(state).slice(0, 4);
+      document.getElementById('dominantScreens').innerHTML = influential.map(row => `
+        <div class="trace-card">
+          <strong>${row.screen}</strong><br>
+          <span class="step-label">${row.labels.join(' • ')}</span>
+        </div>
+      `).join('');
+
+      const allAnswers = Object.values(state.answers || {}).flat();
+      document.getElementById('signalList').innerHTML = allAnswers.slice(0, 8).map(a => `
+        <div class="trace-card">
+          <strong>${a.screen}</strong><br>
+          ${a.label}<br>
+          <span class="step-label">Mapped to: ${Object.entries(a.scores || {}).map(([k,v]) => `${k} +${v}`).join(', ') || 'modifier only'}</span>
+        </div>
+      `).join('');
+
+      document.getElementById('systemStructure').innerHTML = profile.system.map(item => `<div class="system-box"><strong>${item}</strong></div>`).join('');
+      document.getElementById('exampleBlocks').innerHTML = profile.examples.map(item => `<div class="summary-item">${item}</div>`).join('');
+    }
+
+    render();
+  </script>
+</body>
+</html>
