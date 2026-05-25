@@ -1,0 +1,501 @@
+# AaronBux Behavioral Onboarding V2 — Screenwise UX + Logic + Code Scaffold
+
+## Product Direction
+
+This onboarding is NOT a traditional robo-advisor risk questionnaire.
+
+Core goal:
+- identify investor transition state
+- diagnose validation-seeking behavior
+- explain investor evolution
+- map users into decision systems/archetypes
+- teach tradeoffs
+
+The onboarding flow:
+
+```txt
+Current setup
+→ transition pressure
+→ reasoning style
+→ market psychology
+→ investor evolution
+→ tradeoff philosophy
+→ age/time horizon
+→ goals
+→ behavioral interpretation
+→ archetype mapping
+→ example system structure
+```
+
+---
+
+# Shared State Structure
+
+Every screen updates:
+
+```js
+const state = {
+  scores: {
+    BFO: 0,
+    GD: 0,
+    FT: 0,
+    GA: 0,
+    TO: 0,
+    IP: 0,
+    ES: 0
+  },
+  answers: {},
+  metadata: {}
+}
+```
+
+---
+
+# Shared Utilities
+
+Use this on every screen.
+
+```js
+function getState() {
+  const params = new URLSearchParams(window.location.search);
+  const stateParam = params.get('state');
+
+  if (!stateParam) {
+    return {
+      scores: {
+        BFO: 0,
+        GD: 0,
+        FT: 0,
+        GA: 0,
+        TO: 0,
+        IP: 0,
+        ES: 0
+      },
+      answers: {},
+      metadata: {}
+    };
+  }
+
+  try {
+    return JSON.parse(decodeURIComponent(stateParam));
+  } catch (e) {
+    console.error('State parse error', e);
+    return {
+      scores: {
+        BFO: 0,
+        GD: 0,
+        FT: 0,
+        GA: 0,
+        TO: 0,
+        IP: 0,
+        ES: 0
+      },
+      answers: {},
+      metadata: {}
+    };
+  }
+}
+
+function goTo(nextPage, state) {
+  const encoded = encodeURIComponent(JSON.stringify(state));
+  window.location.href = `${nextPage}?state=${encoded}`;
+}
+```
+
+---
+
+# SCREEN 1 — Current Setup
+
+## Goal
+Understand current investing sophistication.
+
+## Heading
+
+```txt
+What does your investing setup already look like?
+```
+
+## Options + Mapping
+
+| Option | Mapping |
+|---|---|
+| I mostly use ETFs/index funds | GD +3, ES +2 |
+| I use a robo-advisor | ES +3, GD +2 |
+| I pick some stocks myself | FT +2, TO +1 |
+| I follow investing communities/content regularly | FT +1, TO +2, GA +1 |
+| I’m experimenting beyond basic investing | GA +3, TO +2 |
+
+## Selection Logic
+
+```js
+const mappings = {
+  etfs: { GD: 3, ES: 2 },
+  robo: { ES: 3, GD: 2 },
+  stocks: { FT: 2, TO: 1 },
+  communities: { FT: 1, TO: 2, GA: 1 },
+  experimenting: { GA: 3, TO: 2 }
+}
+```
+
+---
+
+# SCREEN 2 — Transition Pressure
+
+## Heading
+
+```txt
+What’s making you rethink your investing approach lately?
+```
+
+## Options + Mapping
+
+| Option | Mapping |
+|---|---|
+| I’m not sure if I’m investing the right way | BFO +3, GD +1 |
+| I feel like basic investing may not be enough | FT +3, GA +1 |
+| I want to improve my returns more intentionally | FT +2, TO +2 |
+| I see so many strategies and don’t know what fits me | BFO +2, ES +1 |
+| I want more confidence in my decisions | BFO +3, GD +1 |
+
+---
+
+# SCREEN 3 — Decision Style
+
+## Heading
+
+```txt
+When making investing decisions, what feels most natural to you?
+```
+
+## Options + Mapping
+
+| Option | Mapping |
+|---|---|
+| Keep things simple and consistent | ES +3, GD +2 |
+| Understand tradeoffs before changing anything | BFO +3, FT +1 |
+| Research deeply before acting | FT +3 |
+| Look for opportunities others miss | TO +3, GA +1 |
+| Learn from how experienced investors think | FT +2, BFO +1 |
+
+---
+
+# SCREEN 4 — Market Psychology
+
+## Heading
+
+```txt
+What feels hardest during uncertain markets?
+```
+
+## Options + Mapping
+
+| Option | Mapping |
+|---|---|
+| Knowing whether to stay the course | GD +2, BFO +2 |
+| Feeling like I might be missing opportunities | TO +3, GA +1 |
+| Overreacting emotionally | ES +2, BFO +1 |
+| Knowing when a strategy no longer fits | FT +2, BFO +1 |
+| Filtering useful information from noise | FT +2, GD +1 |
+
+---
+
+# SCREEN 5 — Evolution Direction
+
+## Heading
+
+```txt
+What kind of investor do you think you’re becoming?
+```
+
+## Options + Mapping
+
+| Option | Mapping |
+|---|---|
+| More intentional and structured | BFO +4 |
+| More analytical and research-driven | FT +4 |
+| More growth-oriented | GA +3, TO +1 |
+| More focused on stability and preservation | IP +4 |
+| More experimental and opportunity-seeking | TO +3, GA +2 |
+
+---
+
+# SCREEN 6 — Tradeoff Preference
+
+## Heading
+
+```txt
+Which tradeoff feels most acceptable to you?
+```
+
+## Options + Mapping
+
+| Option | Mapping |
+|---|---|
+| Lower upside for more peace of mind | IP +3, GD +1 |
+| More complexity for potentially better returns | FT +3 |
+| Slower growth for greater stability | IP +2, BFO +1 |
+| More involvement for greater control | FT +2, TO +2 |
+| Missing some opportunities to avoid big mistakes | BFO +3, GD +1 |
+
+---
+
+# SCREEN 7 — Age / Time Horizon
+
+## Heading
+
+```txt
+Which age range are you in?
+```
+
+## Modifier Logic
+
+| Age | Modifier |
+|---|---|
+| Under 25 | GA ×1.2, TO ×1.2, FT ×1.1 |
+| 25–34 | FT ×1.1, GA ×1.1 |
+| 35–44 | no modifier |
+| 45–54 | BFO ×1.1, IP ×1.1 |
+| 55+ | IP ×1.3, GD ×1.1, TO ×0.7 |
+
+## Example Modifier Logic
+
+```js
+if (age === 'under25') {
+  state.scores.GA *= 1.2;
+  state.scores.TO *= 1.2;
+  state.scores.FT *= 1.1;
+}
+```
+
+---
+
+# SCREEN 8 — Goals
+
+## IMPORTANT
+Goals refine.
+They DO NOT override.
+
+## Heading
+
+```txt
+What are you optimizing your investing system for right now?
+```
+
+## Options + Mapping
+
+| Option | Mapping |
+|---|---|
+| Long-term wealth | GD +2, BFO +1 |
+| Financial independence | FT +2, TO +1 |
+| More confidence | BFO +2 |
+| Income generation | IP +3 |
+| Capital preservation | IP +3, GD +1 |
+| Higher growth | GA +3, TO +1 |
+
+---
+
+# FINAL SCREEN — Investor Evolution Profile
+
+## IMPORTANT UX CHANGE
+
+Do NOT start with:
+
+```txt
+You are X archetype
+```
+
+Instead:
+
+```txt
+Interpret the transition first.
+```
+
+---
+
+# Final Screen Layout
+
+## SECTION 1 — Transition Interpretation
+
+Example:
+
+```txt
+You’re evolving from passive ETF investing toward a more intentional and structured investing style.
+```
+
+---
+
+## SECTION 2 — Strongest Signals
+
+Example:
+
+```txt
+Your strongest behavioral signals:
+
+• desire for validation before changing strategy
+• preference for structured decision-making
+• long-term compounding mindset
+• moderate optimization curiosity
+```
+
+---
+
+## SECTION 3 — Archetype Reveal
+
+Example:
+
+```txt
+Your current investing behavior most closely resembles:
+
+Balanced Family Office
+```
+
+---
+
+## SECTION 4 — Why This Archetype
+
+Example:
+
+```txt
+This style prioritizes:
+• clarity
+• diversification
+• intentional portfolio design
+• stable long-term compounding
+
+while giving up:
+• high-risk speculation
+• constant tactical positioning
+```
+
+---
+
+## SECTION 5 — Dominant Screens
+
+Example:
+
+```txt
+Most influential decisions:
+
+Screen 2:
+“I’m not sure if I’m investing the right way”
+
+Screen 5:
+“More intentional and structured”
+
+Screen 6:
+“Missing opportunities to avoid big mistakes”
+```
+
+---
+
+## SECTION 6 — Sample Portfolio System
+
+IMPORTANT:
+Do NOT start with ticker symbols.
+
+Start with structure.
+
+Example:
+
+```txt
+Core diversified foundation
++
+selective optimization layer
++
+small exploration allocation
+```
+
+THEN optionally show:
+
+```txt
+• Broad-market ETFs
+• International diversification
+• Small factor tilt allocation
+• Cash / stability reserve
+```
+
+---
+
+# Archetype Explanations
+
+## BFO — Balanced Family Office
+
+```txt
+Intentional long-term compounding with structured diversification and controlled optimization.
+```
+
+## GD — Global Diversified
+
+```txt
+Simple globally diversified investing focused on consistency and long-term compounding.
+```
+
+## FT — Factor Tilt
+
+```txt
+Systematic optimization through research, factor exposure, and portfolio refinement.
+```
+
+## GA — Growth + Alternatives
+
+```txt
+Growth-focused investing with openness to innovation and non-traditional assets.
+```
+
+## TO — Tactical Opportunistic
+
+```txt
+Actively seeking opportunities through timing, positioning, and market responsiveness.
+```
+
+## IP — Income Preservation
+
+```txt
+Protecting capital while generating reliable long-term income and stability.
+```
+
+## ES — Effortless & Simple
+
+```txt
+Low-maintenance investing designed for simplicity and emotional ease.
+```
+
+---
+
+# Recommendation Algorithm
+
+## Step 1
+Aggregate weighted scores.
+
+## Step 2
+Apply age modifiers.
+
+## Step 3
+Determine top 2 archetypes.
+
+## Step 4
+Generate transition interpretation.
+
+## Step 5
+Generate:
+- strongest signals
+- dominant screens
+- tradeoffs
+- sample system structure
+
+---
+
+# MOST IMPORTANT PRODUCT PRINCIPLE
+
+AaronBux is NOT:
+
+```txt
+portfolio recommendation software
+```
+
+AaronBux IS:
+
+```txt
+investor evolution intelligence
+```
+
